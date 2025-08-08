@@ -2,30 +2,55 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 import { getImagesByQuery } from './js/pixabay-api.js';
+import {
+  createGallery,
+  clearGallery,
+  showLoader,
+  hideLoader,
+} from './js/render-functions.js';
 
-const refs = {
-  formElem: document.querySelector('.form'),
-  inputElem: document.querySelector('.input-text'),
-  btnInputElem: document.querySelector('.btn'),
-  waitElem: document.querySelector('.waiting-text'),
-};
+const formElem = document.querySelector('.form');
+const inputElem = document.querySelector('.input-text');
 
-refs.formElem.addEventListener('submit', e => {
+formElem.addEventListener('submit', e => {
   e.preventDefault();
-  const query = refs.inputElem.value;
-  if (query.trim().length < 1) {
-    refs.btnInputElem.disabled = true;
+
+  clearGallery();
+  const query = inputElem.value.trim();
+
+  if (query === '') {
+    iziToast.error({
+      title: 'Warning',
+      message: 'Please enter a search query!',
+      position: 'topRight',
+    });
     return;
   }
-  getImagesByQuery(query).then(data => {
-    if (data.hits.length === 0) {
+  inputElem.value = '';
+
+  showLoader();
+  getImagesByQuery(query)
+    .then(data => {
+      if (data.hits.length === 0) {
+        iziToast.error({
+          title: 'Error',
+          message:
+            'Sorry, there are no images matching your search query. Please, try again!',
+          position: 'topRight',
+        });
+        return;
+      }
+
+      createGallery(data.hits);
+    })
+    .catch(error => {
       iziToast.error({
         title: 'Error',
-        message:
-          'Sorry, there are no images matching your search query. Please, try again!',
+        message: 'Something went wrong. Please try again later...',
         position: 'topRight',
       });
-    } else {
-    }
-  });
+    })
+    .finally(() => {
+      hideLoader();
+    });
 });

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export async function getImagesByQuery(query) {
+export function getImagesByQuery(query) {
   const BASE_URL = 'https://pixabay.com/';
   const END_POINT = 'api/';
-  const API_KEY = 'u_r791irhjg4';
+  const API_KEY = '34575969-428170e5bc4fca7f33bfb3efe';
   const params = new URLSearchParams({
     q: query,
     key: API_KEY,

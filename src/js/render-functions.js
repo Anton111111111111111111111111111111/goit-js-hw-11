@@ -17,24 +17,24 @@ export function createGallery(images) {
         width='360'
         height="200"
       />
-      <div class="img-info-list">
-            <div class="info-item">
-              <h2 class="info-title">Likes</h2>
-              <p class="info-text">${image.likes}</p>
-            </div>
-            <div class="info-item">
-              <h2 class="info-title">Views</h2>
-              <p class="info-text">${image.views}</p>
-            </div>
-            <div class="info-item">
-              <h2 class="info-title">Comments</h2>
-              <p class="info-text">${image.comments}</p>
-            </div>
-            <div class="info-item">
-              <h2 class="info-title">Downloads</h2>
-              <p class="info-text">${image.downloads}</p>
-            </div>
-          </div>
+      <li class="img-info-list">
+        <div class="info-item">
+          <h2 class="info-title">Likes</h2>
+          <p class="info-text">${image.likes}</p>
+        </div>
+        <div class="info-item">
+          <h2 class="info-title">Views</h2>
+          <p class="info-text">${image.views}</p>
+        </div>
+        <div class="info-item">
+          <h2 class="info-title">Comments</h2>
+          <p class="info-text">${image.comments}</p>
+        </div>
+        <div class="info-item">
+          <h2 class="info-title">Downloads</h2>
+            <p class="info-text">${image.downloads}</p>
+        </div>
+      </li>
     </a>`
     )
     .join('\n');
